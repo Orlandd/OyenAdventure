@@ -12,17 +12,8 @@ public class End extends Actor
      * Act - do whatever the End wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public End () {
-        GreenfootImage myImage = getImage();
-        int myNewHeight = (int)myImage.getHeight()/20;
-        int myNewWidth = (int)myImage.getWidth()/20;
-        myImage.scale(myNewWidth, myNewHeight);
-    }
-    public void act()
+    public End()
     {
-        if(Greenfoot.mousePressed(this)){
-            Greenfoot.delay(5);
-            Greenfoot.setWorld(new Start());
-        }
+
     }
 }

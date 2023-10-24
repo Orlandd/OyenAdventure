@@ -14,6 +14,7 @@ public class Cat extends Actor
      */
     int score = 0;
     int isOver = 0;
+    int gameOver = 0;
     
     GreenfootSound Musik01 = new GreenfootSound("Varmintz_01.mp3");
     GreenfootSound Musik02 = new GreenfootSound ("dead.mp3");
@@ -27,6 +28,7 @@ public class Cat extends Actor
     
     private boolean soundHasPlayed = false;
     private boolean mulai = false;
+    private boolean lagumenang = false;
     
     public Cat() {
     int myNewHeight1 = (int)image1.getHeight() / 18;
@@ -85,54 +87,123 @@ public class Cat extends Actor
     
     public void end(){
         End end = new End();
+        PMPR pmpr = new PMPR();
+        Car1 car1 = new Car1();
+        Car2 car2 = new Car2();
         
-        if(isTouching(Car1.class)||isTouching(Car2.class)) {
-            getWorld().addObject(end,200,313);
-            Greenfoot.stop();
-            Musik02.play();
-            Musik02.setVolume ( 100 );
+        if (isTouching(Car1.class) || isTouching(Car2.class)) {
+            if (gameOver == 0) {
+                Musik02.play();
+                Musik02.setVolume(100);
+                Musik01.stop();
+                gameOver = 1;
+            }
+            
+            getWorld().addObject(end, 200, 250);
+            getWorld().addObject(pmpr, 200, 380);
+            isOver = 1;
+        
+            boolean enterPressed = false;
+            boolean spacePressed = false;
+        
+            while (!enterPressed && !spacePressed) {
+                if (Greenfoot.isKeyDown("enter")) {
+                    enterPressed = true;
+                }
+                if (Greenfoot.isKeyDown("space")) {
+                    spacePressed = true;
+                }
+                Greenfoot.delay(1); 
+            }
+        
+            if (enterPressed) {
+                Greenfoot.setWorld(new Menu());
+                isOver = 0;
+            } else if (spacePressed) {
+                Class<? extends World> currentLevel = getWorld().getClass();
+                if (currentLevel == Level1.class) {
+                    Greenfoot.setWorld(new Level1());
+                } else if (currentLevel == Level2.class) {
+                    Greenfoot.setWorld(new Level2());
+                } else if (currentLevel == Level3.class) {
+                    Greenfoot.setWorld(new Level3());
+                } else if (currentLevel == Level4.class) {
+                    Greenfoot.setWorld(new Level4());
+                } else if (currentLevel == Level5.class) {
+                    Greenfoot.setWorld(new Level5());
+                }
+                isOver = 0;
+            }
         }
         
         if(isTouching(Food.class)){
             //getWorld().showText("Nyammm\n Score : " + score + " \n press enter to next ",200, 300);
-            Win win = new Win();
-            isOver=1;
+            boolean enterPressed = false;
+            PN pn = new PN();
             Musik_mati();
             
+            getWorld().showText("Nyammm\n Score : " + score,200, 300);
+            getWorld().addObject(pn, 200, 380);
+            
+            isOver=1;
+            
+            while (!enterPressed) {
+            if (Greenfoot.isKeyDown("enter")) {
+                enterPressed = true;
+                }
+                Greenfoot.delay(1);
+            }
+            
             if (getWorld()instanceof Level1) {
-                getWorld().showText("Nyammm\n Score : " + score + " \n press enter to next ",200, 300);
-                if(Greenfoot.isKeyDown("enter")) {
+                if(enterPressed) {
                     Greenfoot.setWorld(new Level2());
                     isOver=0;
                 }
             } else if (getWorld()instanceof Level2) {
-                getWorld().showText("Nyammm\n Score : " + score + " \n press enter to next ",200, 300);
-                if(Greenfoot.isKeyDown("enter")) {
+                if(enterPressed) {
                     Greenfoot.setWorld(new Level3());
                     isOver=0;
                 }
             } else if (getWorld()instanceof Level3) {
-                getWorld().showText("Nyammm\n Score : " + score + " \n press enter to next ",200, 300);
-                if(Greenfoot.isKeyDown("enter")) {
+                if(enterPressed) {
                     Greenfoot.setWorld(new Level4());
                     isOver=0;
                 }
             } else if (getWorld()instanceof Level4) {
-                getWorld().showText("Nyammm\n Score : " + score + " \n press enter to next ",200, 300);
-                if(Greenfoot.isKeyDown("enter")) {
+                if(enterPressed) {
                     Greenfoot.setWorld(new Level5());
                     isOver=0;
                 }
-            } else if(getWorld()instanceof Level5) { 
-                getWorld().showText("Nyammm\n Score : " + score ,200, 370);
-                getWorld().addObject(win,200,313);
-                Musik06.play();
-                Greenfoot.stop();
+            } 
+        }
+        if (isTouching(Home.class)) {
+            boolean enterPressed = false;
+            Win win = new Win();
+            PM pm = new PM();
+            isOver=1;
+            Musik_mati();
+            
+            getWorld().showText("Score : " + score ,200, 310);
+            getWorld().addObject(win,200,280);
+            getWorld().addObject(pm,200,380);
+            
+            if (!lagumenang) {
+            Musik06.play();
+            lagumenang = true;
             }
             
+            while (!enterPressed) {
+            if (Greenfoot.isKeyDown("enter")) {
+                enterPressed = true;
+                }
+                Greenfoot.delay(1);
+            }
+            if(enterPressed) {
+                Greenfoot.setWorld(new Menu());
+                isOver=0;
+                }
+            }
         }
-     }
-    
     public void addscore(){
         if(isTouching(Coin.class)){
             score = score + 1;
