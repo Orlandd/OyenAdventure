@@ -35,7 +35,7 @@ public class Level3 extends World
             addObject(car1,400 , 170); 
         }
         if(Greenfoot.getRandomNumber(100)<2){
-            addObject(car1,400 , 230); 
+            addObject(car1,400 , 240); 
         }
 
         if(Greenfoot.getRandomNumber(100)<2){
@@ -47,7 +47,7 @@ public class Level3 extends World
         }
         
         if(Greenfoot.getRandomNumber(200)<2){
-            addObject(car2, 0, 600); 
+            addObject(car2, 0, 620); 
         }
 
     }

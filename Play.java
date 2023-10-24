@@ -23,7 +23,7 @@ public class Play extends Actor
     {
         if(Greenfoot.mousePressed(this)){
             Greenfoot.delay(5);
-            Greenfoot.setWorld(new Level1());
+            Greenfoot.setWorld(new Menu());
         }
     }
     

@@ -28,6 +28,7 @@ public class Level1 extends World
         cat.setLocation(527,1769);
         cat.setLocation(505,1839);
         cat.setLocation(231,668);
+        
 
         Food food = new Food();
         addObject(food, Greenfoot.getRandomNumber(100) + Greenfoot.getRandomNumber(280) , 50);
@@ -134,13 +135,13 @@ public class Level1 extends World
         addObject(coin23,177,218);
         cone.setLocation(19,342);
     }
-    
+    int speed = 2;
     public void act() {
         Car1 car1 = new Car1();
-        car1.speed = -2;
+        car1.speed = -speed;
         
         Car2 car2 = new Car2();
-        car2.speed = 2;
+        car2.speed = speed;
         
         if(Greenfoot.getRandomNumber(120)<2){
             addObject(car1,400 , 100); 

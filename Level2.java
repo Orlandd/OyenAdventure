@@ -109,10 +109,13 @@ public class Level2 extends World
         cone3.setLocation(87,116);
         cone3.setLocation(83,112);
     }
-    
+    int speed = 3;
     public void act() {
         Car1 car1 = new Car1();
-        car1.speed = -3;
+        car1.speed = -speed;
+        
+        Car2 car2 = new Car2();
+        car2.speed = speed;
         
         if(Greenfoot.getRandomNumber(120)<2){
             addObject(car1,400 , 100); 

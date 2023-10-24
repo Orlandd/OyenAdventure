@@ -1,22 +1,22 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Start here.
+ * Write a description of class Story here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Start extends World
+public class Story extends World
 {
 
     /**
-     * Constructor for objects of class Start.
+     * Constructor for objects of class Story.
      * 
      */
-    public Start()
+    public Story()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(405, 720, 1); 
+        super(405, 720, 1);
         prepare();
     }
     
@@ -26,8 +26,11 @@ public class Start extends World
      */
     private void prepare()
     {
-        Akey akey = new Akey();
-        addObject(akey,208,313);
-        akey.setLocation(200,630);
+        ElementStory2 elementStory2 = new ElementStory2();
+        addObject(elementStory2,201,250);
+
+        Back back = new Back();
+        addObject(back,201,450);
+        
     }
 }
